@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Countdown to Wednesday</title>
+  <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+  <style>
+    #countdown {
+      font-size: 36px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 50px;
+      color: rgb(59, 0, 0);
+      font-family: 'Space Mono', monospace;
+    }
+
+    #countdown span {
+      font-size: 80px;
+      font-weight: bold;
+      margin: 0 10px;
+      color: rgb(167, 0, 0);
+      font-family: 'Space Mono', monospace;
+    }
+
+    body {
+      background-color: black;;
+      background-size: cover;
+      background-position: center;
+    }
+
+    body.wednesday {
+      background-image: url('wednesdayman.png');
+    }
+
+    h1 {
+
+        color: white;
+        font-family: 'Space Mono', monospace;
+
+    }
+  </style>
+  <script>
+    // set the date for Wednesday (3 = Wednesday)
+    var countDownDate = new Date();
+    countDownDate.setDate(countDownDate.getDate() + (3 + 7 - countDownDate.getDay()) % 7);
+
+    // update the countdown every second
+    var x = setInterval(function() {
+
+      // get today's date and time
+      var now = new Date().getTime();
+
+      // calculate the difference between now and the countdown date
+      var distance = countDownDate - now;
+
+      // if it's Wednesday, show the message and update the background
+      if (distance <= 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "It is Wednesday my dudes!";
+        document.getElementById("days").innerHTML = "0";
+        document.getElementById("hours").innerHTML = "00";
+        document.getElementById("minutes").innerHTML = "00";
+        document.getElementById("seconds").innerHTML = "00";
+        document.body.classList.add('wednesday');
+      } else {
+        // calculate days, hours, minutes, and seconds left
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // display the countdown
+        document.getElementById("days").innerHTML = days;
+        document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+        document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+        document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+      }
+    }, 1000);
+  </script>
+</head>
+<body>
+    <center><h1>It is not Wednesday my dudes.</h1></center>
+  <div id="countdown">
+    <span id="days"></span>:
+    <span id="hours"></span>:
+    <span id="minutes"></span>:
+    <span id="seconds"></span>
+  </div>
+</body>
+</html>
